@@ -9,5 +9,24 @@ namespace scraphp\entity;
 
 class Status
 {
-
+    /**
+     * @var string
+     */
+    public $url;
+    /**
+     * @var string
+     */
+    public $injectedScript;
+    /**
+     * @var string
+     */
+    public $elapsedSeconds;
+    /**
+     * @var int
+     */
+    public $doneJobCount;
+    /**
+     * @var int
+     */
+    public $remainingJobCount;
 }

@@ -5,6 +5,7 @@ namespace scraphp;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use scraphp\entity\Job;
+use scraphp\entity\Status;
 use scraphp\interfaces\StatusUpdateInterface;
 
 class Scraphp
@@ -44,11 +45,15 @@ class Scraphp
         $this->jobBuffer = $jobBuffer;
         $this->outputBuffer = $outputBuffer;
         $this->jobScriptDir = $jobScriptDir;
+        $this->statusUpdate = new StatusUpdateNull();
     }
 
     public function run()
     {
-        $driver = RemoteWebDriver::create('http://127.0.0.1:8910', DesiredCapabilities::phantomjs());
+        if($this->remoteWebDriver === null){
+            $this->remoteWebDriver = RemoteWebDriver::create('http://127.0.0.1:8910', DesiredCapabilities::phantomjs());
+        }
+
 
         $script = '';
         $script .= file_get_contents(__DIR__ . '/js/jquery-2.2.2.min.js');
@@ -57,14 +62,29 @@ class Scraphp
         $script .= "\n\n";
 
         while ($job = $this->jobBuffer->getJob()) {
-            $driver->get($job->url);
+            $status = $this->createInitStatus($job);
+            $this->remoteWebDriver->get($job->url);
             $inject = $script;
             $inject .= file_get_contents($this->jobScriptDir . '/' . $job->script);
             $inject .= "\n\n return phantomScraper.getResult();";
-            $res = $driver->executeScript($inject);
+            $res = $this->remoteWebDriver->executeScript($inject);
             $this->addJobs($res['jobs']);
             $this->addData($res['data']);
+            $this->updateStatus($status);
         }
+    }
+
+    /**
+     * @param Job $job
+     * @return Status
+     */
+    private function createInitStatus($job)
+    {
+        $status = new Status();
+        $status->url = $job->url;
+        $status->injectedScript = $this->jobScriptDir . '/' . $job->script;
+        $status->elapsedSeconds = - microtime(true);
+        return $status;
     }
 
     /**
@@ -73,9 +93,7 @@ class Scraphp
     private function addJobs($jobs)
     {
         foreach ($jobs as $jobProp) {
-            $job = new Job();
-            $job->url = $jobProp['url'];
-            $job->script = $jobProp['file'];
+            $job = Job::create($jobProp['url'], $jobProp['file']);
             $this->jobBuffer->addJob($job);
         }
     }
@@ -88,6 +106,17 @@ class Scraphp
         foreach ($dataArr as $data) {
             $this->outputBuffer->addData($data);
         }
+    }
+
+    /**
+     * @param Status $status
+     */
+    private function updateStatus($status)
+    {
+        $status->remainingJobCount = $this->jobBuffer->getBufferedJobsCount();
+        $status->doneJobCount = $this->jobBuffer->getTotalJobsCount() - $status->remainingJobCount;
+        $status->elapsedSeconds += microtime(true);
+        $this->statusUpdate->updateStatus($status);
     }
 
     /**

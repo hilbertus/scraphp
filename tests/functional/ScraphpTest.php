@@ -7,6 +7,7 @@ use scraphp\OutputBufferArray;
 use scraphp\entity\Job;
 use scraphp\JobBuffer;
 use scraphp\Scraphp;
+use scraphp\StatusUpdateEcho;
 
 class ScraphpTest extends \PHPUnit_Framework_TestCase
 {
@@ -22,6 +23,7 @@ class ScraphpTest extends \PHPUnit_Framework_TestCase
         $jobScriptDir = __DIR__ . '/wikiScraper';
 
         $scraphp = new Scraphp($jobBuffer, $outputBuffer, $jobScriptDir);
+        $scraphp->statusUpdate = new StatusUpdateEcho();
         $scraphp->run();
         $filledOutputBuffer = $scraphp->getOutputBuffer();
 
