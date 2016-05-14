@@ -4,7 +4,7 @@ This means pages with dynamic content are no longer a problem. It is up to you t
 or collect the data for later processing. 
 
 ## Install
-1. Download or clone scraphp
+1. Download or clone scraphp. Alternatively install with composer `composer require "hilbertus/scraphp"`
 2. Download [PhantomJS](http://phantomjs.org/) (default webdriver server for this project. After downloading, start `phantomjs  --webdriver=8910`)
 
 ## Get started
