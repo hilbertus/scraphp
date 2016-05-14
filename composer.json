@@ -1,6 +1,7 @@
 {
   "name": "hilberus/scraphp",
-  "description": "description_text",
+  "version": "1.0.0",
+  "description": "scrape sites with phantomjs and jquery",
   "minimum-stability": "stable",
   "license": "proprietary",
   "authors": [
