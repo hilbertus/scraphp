@@ -1,5 +1,5 @@
 {
-  "name": "hilberus/scraphp",
+  "name": "hilbertus/scraphp",
   "version": "1.0.0",
   "description": "scrape sites with phantomjs and jquery",
   "minimum-stability": "stable",
