@@ -10,4 +10,5 @@ composer.lock
 # scraphp
 /demo/
 !*.gitkeep
+/src/Scraper/
 

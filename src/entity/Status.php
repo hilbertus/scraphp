@@ -4,7 +4,7 @@
  * Date: 10.04.2016 17:58
  */
 
-namespace scraphp\entity;
+namespace scraphp\Entity;
 
 
 class Status

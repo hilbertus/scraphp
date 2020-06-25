@@ -3,7 +3,7 @@
 
 namespace scraphp;
 
-use scraphp\interfaces\OutputBufferInterface;
+use scraphp\Interfaces\OutputBufferInterface;
 
 class OutputBufferArray implements OutputBufferInterface
 {

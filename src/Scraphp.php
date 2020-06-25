@@ -4,9 +4,9 @@ namespace scraphp;
 
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
-use scraphp\entity\Job;
-use scraphp\entity\Status;
-use scraphp\interfaces\StatusUpdateInterface;
+use scraphp\Entity\Job;
+use scraphp\Entity\Status;
+use scraphp\Interfaces\StatusUpdateInterface;
 
 class Scraphp
 {

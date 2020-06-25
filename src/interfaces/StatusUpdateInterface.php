@@ -1,8 +1,8 @@
 <?php
 
-namespace scraphp\interfaces;
+namespace scraphp\Interfaces;
 
-use scraphp\entity\Status;
+use scraphp\Entity\Status;
 
 interface StatusUpdateInterface
 {

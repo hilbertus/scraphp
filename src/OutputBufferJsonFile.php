@@ -2,7 +2,7 @@
 
 namespace scraphp;
 
-use scraphp\interfaces\OutputBufferInterface;
+use scraphp\Interfaces\OutputBufferInterface;
 
 class OutputBufferJsonFile implements OutputBufferInterface
 {

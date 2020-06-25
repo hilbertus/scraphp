@@ -4,7 +4,7 @@ namespace functional;
 
 
 use scraphp\OutputBufferArray;
-use scraphp\entity\Job;
+use scraphp\Entity\Job;
 use scraphp\JobBuffer;
 use scraphp\Scraphp;
 use scraphp\StatusUpdateEcho;

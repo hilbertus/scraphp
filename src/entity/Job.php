@@ -6,7 +6,7 @@
  * Time: 18:35
  */
 
-namespace scraphp\entity;
+namespace scraphp\Entity;
 
 
 class Job

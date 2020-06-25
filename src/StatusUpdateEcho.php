@@ -4,8 +4,8 @@
 namespace scraphp;
 
 
-use scraphp\entity\Status;
-use scraphp\interfaces\StatusUpdateInterface;
+use scraphp\Entity\Status;
+use scraphp\Interfaces\StatusUpdateInterface;
 
 class StatusUpdateEcho implements StatusUpdateInterface
 {

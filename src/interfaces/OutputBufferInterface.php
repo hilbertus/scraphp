@@ -1,6 +1,6 @@
 <?php
 
-namespace scraphp\interfaces;
+namespace scraphp\Interfaces;
 
 
 interface OutputBufferInterface

@@ -1,7 +1,7 @@
 # scraphp
-Scrape your data like you would do it with the help of jQuery in browsers console. 
-This means pages with dynamic content are no longer a problem. It is up to you to transfer the data in desired formats 
-or collect the data for later processing. 
+A php scraper that can also use the webdriver interface. 
+This allows you to have your browser scrape and fill in captchas 
+again and again when needed.
 
 ## Install
 1. Download or clone scraphp. Alternatively install with composer `composer require "hilbertus/scraphp"`
