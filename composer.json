@@ -10,7 +10,7 @@
     }
   ],
   "require": {
-    "php": ">7.4",
+    "php": "7.4",
     "php-webdriver/webdriver": "1.8.*",
     "imangazaliev/didom": "^1.16"
   },
