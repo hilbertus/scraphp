@@ -30,7 +30,7 @@ class ArrayJobBuffer implements JobBufferInterface
         if (array_key_exists($job->url, $this->existingJobUrls)) {
             return;
         }
-        array_push($this->jobs, $job);
+        $this->jobs[$job->url] = $job;
         $this->existingJobUrls[$job->url] = null;
     }
 
@@ -39,7 +39,7 @@ class ArrayJobBuffer implements JobBufferInterface
      */
     public function getNextJob()
     {
-        return array_shift($this->jobs);
+        return reset($this->jobs);
     }
 
     public function getNumberOfRemainingJobs(): int
@@ -50,5 +50,13 @@ class ArrayJobBuffer implements JobBufferInterface
     public function getNumberOfTotalJob(): int
     {
         return count($this->existingJobUrls);
+    }
+
+    public function markDoneJob(Job $job)
+    {
+        if (!key_exists($job->url, $this->jobs)) {
+            return;
+        }
+        unset($this->jobs[$job->url]);
     }
 }

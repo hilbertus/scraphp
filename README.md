@@ -9,7 +9,6 @@ again and again when needed.
 
 ## Get started
 
-Look in *tests/functional/ScraphpTest.php*
 
 TODO
 

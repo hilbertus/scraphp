@@ -19,4 +19,6 @@ interface JobBufferInterface
     public function getNumberOfRemainingJobs(): int;
 
     public function getNumberOfTotalJob(): int;
+
+    public function markDoneJob(Job $job);
 }

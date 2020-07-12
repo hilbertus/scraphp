@@ -44,6 +44,17 @@ class Result
         }
     }
 
+    public function addRecords(array $records, bool $useIndexAsRecordId = false)
+    {
+        foreach ($records as $arrIndex => $record) {
+            if ($useIndexAsRecordId) {
+                $this->addRecord($record, $arrIndex);
+            } else {
+                $this->addRecord($record);
+            }
+        }
+    }
+
     public function getUniqueRecordsIndexedById(): array
     {
         return $this->uniqueRecords;

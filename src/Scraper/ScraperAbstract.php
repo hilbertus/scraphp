@@ -11,6 +11,8 @@ use Scraphp\Loader\LoaderInterface;
 use Scraphp\Result\ArrayOutputBuffer;
 use Scraphp\Result\OutputBufferInterface;
 use Scraphp\Result\Result;
+use Scraphp\Status\EchoStatusLogger;
+use Scraphp\Status\StatusLoggerInterface;
 
 abstract class ScraperAbstract
 {
@@ -20,6 +22,11 @@ abstract class ScraperAbstract
 
         // TODO implement default Loader
         throw new \Exception('Function not implemented yet');
+    }
+
+    public function getStatusLogger(): StatusLoggerInterface
+    {
+        return new EchoStatusLogger();
     }
 
     public function getJobBuffer(): JobBufferInterface

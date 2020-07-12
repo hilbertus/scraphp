@@ -31,7 +31,12 @@ class WebDriverLoader implements LoaderInterface
 
     public function getText(string $selector): array
     {
-        // TODO: Implement getText() method.
+        $webDriverElements = $this->remoteWebDriver->findElements(WebDriverBy::cssSelector($selector));
+        $result = [];
+        foreach ($webDriverElements as $webDriverElement) {
+            $result[] = $webDriverElement->getText();
+        }
+        return $result;
     }
 
     public function getIterativeText(string $selector4Iteration, array $subSelectionsIndexedByNames): array
@@ -39,7 +44,6 @@ class WebDriverLoader implements LoaderInterface
         $webDriverElements = $this->remoteWebDriver->findElements(WebDriverBy::cssSelector($selector4Iteration));
         $result = [];
         foreach ($webDriverElements as $webDriverElement) {
-//            $element->findElement()
             $row = [];
             foreach ($subSelectionsIndexedByNames as $name => $subSelector) {
                 $subWebDriverElement = $webDriverElement->findElement(WebDriverBy::cssSelector($subSelector));
@@ -52,12 +56,22 @@ class WebDriverLoader implements LoaderInterface
 
     public function getInnerHTML(string $selector): array
     {
-        // TODO: Implement getHTML() method.
+        $webDriverElements = $this->remoteWebDriver->findElements(WebDriverBy::cssSelector($selector));
+        $result = [];
+        foreach ($webDriverElements as $webDriverElement) {
+            $result[] = $this->remoteWebDriver->executeScript('return arguments[0].innerHTML;', [$webDriverElement]);
+        }
+        return $result;
     }
 
     public function getAttr(string $selector, string $attribute): array
     {
-        // TODO: Implement getAttr() method.
+        $webDriverElements = $this->remoteWebDriver->findElements(WebDriverBy::cssSelector($selector));
+        $result = [];
+        foreach ($webDriverElements as $webDriverElement) {
+            $result[] = $webDriverElement->getAttribute($attribute);
+        }
+        return $result;
     }
 
     public function __destruct()

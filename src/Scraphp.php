@@ -16,13 +16,15 @@ class Scraphp
         $jobBuffer = $scraper->getJobBuffer();
         $jobs = $scraper->getInitialJobs();
         $jobBuffer->addJobsOnce($jobs);
+        $logger = $scraper->getStatusLogger();
         while ($job = $jobBuffer->getNextJob()) {
-            // TODO Status ausgeben
+            $logger->log($job, $jobBuffer);
             $loader->openUrl($job->url);
             $result = $scraper->scrape($loader, $job);
             $outputBuffer->addRecords($result->getRecords());
             $outputBuffer->addRecordsIndexedByRecordId($result->getUniqueRecordsIndexedById());
             $jobBuffer->addJobsOnce($result->getJobs());
+            $jobBuffer->markDoneJob($job);
         }
         return $outputBuffer;
     }
